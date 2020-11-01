@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSearch, faTimesCircle } from "@fortawesome/free-solid-svg-icons";
+import PropTypes from "prop-types";
 
 const FileSearch = ({ title, onFileSearch }) => {
   const [inputActive, setInputActive] = useState(false);
@@ -62,7 +63,7 @@ const FileSearch = ({ title, onFileSearch }) => {
           <input
             ref={node}
             autoFocus
-            className="form-control"
+            className="form-control mr-1"
             value={keyWords}
             onChange={(e) => {
               setKeyWords(e.target.value);
@@ -86,4 +87,14 @@ const FileSearch = ({ title, onFileSearch }) => {
   );
 };
 
+// 属性校验检查
+FileSearch.propTypes = {
+  title: PropTypes.string,
+  onFileSearch: PropTypes.func.isRequired,
+};
+
+// 设置默认值
+FileSearch.defaultProps = {
+  title: "我的云文档",
+};
 export default FileSearch;
