@@ -2,44 +2,32 @@ import React, { useState, useEffect, useRef } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSearch, faTimesCircle } from "@fortawesome/free-solid-svg-icons";
 import PropTypes from "prop-types";
+import useKeyPress from "../hooks/useKeyPress";
 
 const FileSearch = ({ title, onFileSearch }) => {
   const [inputActive, setInputActive] = useState(false);
   const [keyWords, setKeyWords] = useState("");
+  const enterPress = useKeyPress(13);
+  const escPress = useKeyPress(27);
 
   // useRef可以记录节点内容等
   let node = useRef(null);
 
   // 清空值及关闭输入框
-  const closeSearch = (e) => {
-    e.preventDefault();
+  const closeSearch = () => {
     setKeyWords("");
     setInputActive(false);
   };
 
+  // 输入框事件
   useEffect(() => {
-    const handleInputEvent = (e) => {
-      const { keyCode } = e;
-      if (keyCode === 13 && inputActive) {
-        // 回车事件
-        onFileSearch(keyWords);
-      } else if (keyCode === 27 && inputActive) {
-        // esc事件
-        closeSearch(e);
-      }
-    };
-    document.addEventListener("keyup", handleInputEvent);
-    // 销毁事件
-    return () => {
-      document.removeEventListener("keyup", handleInputEvent);
-    };
+    if (enterPress && inputActive) {
+      onFileSearch(keyWords);
+    } else if (escPress && inputActive) {
+      closeSearch();
+    }
   });
 
-  // useEffect((e) => {
-  //   if (inputActive) {
-  //     console.log(node.current);
-  //   }
-  // });
   return (
     <div className="alert alert-primary mb-0">
       {/* 标题提示 */}

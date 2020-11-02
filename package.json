@@ -15,6 +15,7 @@
     "cross-env": "^7.0.2",
     "electron": "^10.1.5",
     "electron-is-dev": "^1.2.0",
+    "lodash": "^4.17.20",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "react-scripts": "3.4.3",

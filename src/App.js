@@ -24,8 +24,8 @@ function App() {
             onFileCilck={(id) => {
               console.log(id);
             }}
-            onFileEdit={(id) => {
-              console.log(id);
+            onFileEdit={(id, value) => {
+              console.log(id, value);
             }}
             onFileDelete={(id) => {
               console.log(id);
