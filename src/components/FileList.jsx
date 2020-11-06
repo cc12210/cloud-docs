@@ -7,7 +7,7 @@ import {
   faTimesCircle,
 } from "@fortawesome/free-solid-svg-icons";
 import PropTypes from "prop-types";
-import "./FileList.css";
+import "./FileList.scss";
 import { find, map } from "lodash";
 import useKeyPress from "../hooks/useKeyPress";
 
@@ -20,6 +20,7 @@ const FileList = ({ files, onFileCilck, onFileEdit, onFileDelete }) => {
   const escPress = useKeyPress(27);
 
   // 监听键盘事件
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(() => {
     if (enterPress && editStatus) {
       // 标题不能为空

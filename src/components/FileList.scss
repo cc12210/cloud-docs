@@ -1,8 +1,7 @@
 .file-list-container {
   overflow: scroll;
   height: 100%;
-}
-
-.file-list-container .file-list-item {
-  cursor: pointer;
+  .file-list-item {
+    cursor: pointer;
+  }
 }

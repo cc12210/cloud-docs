@@ -1,0 +1,39 @@
+.app-container {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  top: 0;
+  .app-content {
+    height: 100%;
+    .app-left-nav {
+      position: relative;
+      .app-left-nav-search {
+        position: absolute;
+        top: 0;
+        left: 15px;
+        right: 15px;
+      }
+
+      .app-left-nav-list {
+        position: absolute;
+        top: 80px;
+        bottom: 80px;
+        left: 15px;
+        right: 15px;
+        box-sizing: border-box;
+      }
+
+      .app-left-nav-bottom {
+        position: absolute;
+        left: 15px;
+        right: 15px;
+        bottom: 16px;
+      }
+    }
+  }
+
+  .app-right-content {
+    background: rgba(0, 0, 0, 0.05);
+  }
+}

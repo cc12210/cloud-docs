@@ -1,6 +1,5 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faPlus, faUpload } from "@fortawesome/free-solid-svg-icons";
 import PropTypes from "prop-types";
 
 const BottomBtn = ({ text, colorClass, icon, onBtnClick }) => {

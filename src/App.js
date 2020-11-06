@@ -1,13 +1,15 @@
-import React from "react";
-import "./App.css";
+import React, { useState } from "react";
+import "./App.scss";
 import { faPlus, faFileImport } from "@fortawesome/free-solid-svg-icons";
 import "bootstrap/dist/css/bootstrap.min.css";
 import FileSearch from "./components/FileSearch";
 import FileList from "./components/FileList";
 import BottomBtn from "./components/BottomBtn";
-import { fileListData } from "./utils/defaultJson";
+import TabList from "./components/TabList";
+import { fileListData, tabChoose } from "./utils/defaultJson";
 
 function App() {
+  const [activeId, setActiveId] = useState(null);
   return (
     <div className="App container-fluid app-container">
       <div className="row app-content">
@@ -52,7 +54,18 @@ function App() {
           </div>
         </div>
         {/* 右侧内容 */}
-        <div className="col-9 bg-info">One of three columns</div>
+        <div className="col-9 app-right-content">
+          <div className="app-right-tab">
+            <TabList
+              files={tabChoose}
+              activeId={activeId}
+              onTabClick={(id) => {
+                console.log(id);
+                setActiveId(id);
+              }}
+            />
+          </div>
+        </div>
       </div>
     </div>
   );
