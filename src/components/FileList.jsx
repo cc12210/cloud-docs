@@ -41,7 +41,7 @@ const FileList = ({ files, onFileCilck, onFileEdit, onFileDelete }) => {
   });
   // 渲染的内容
   return (
-    <div className="file-list-container mt-3 text-left">
+    <div className="file-list-container text-left">
       <ul className="list-group">
         {files &&
           files.length &&
