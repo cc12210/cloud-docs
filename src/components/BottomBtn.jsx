@@ -4,7 +4,7 @@ import PropTypes from "prop-types";
 
 const BottomBtn = ({ text, colorClass, icon, onBtnClick }) => {
   return (
-    <div className="bottom-btn">
+    <div className="bottom-btn d-flex justify-content-center">
       <button
         type="button"
         onClick={onBtnClick}

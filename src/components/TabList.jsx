@@ -2,22 +2,31 @@ import React, { useState, useEffect } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTimes } from "@fortawesome/free-solid-svg-icons";
 import PropTypes from "prop-types";
-import { map } from "lodash";
+import { map, findIndex, toNumber } from "lodash";
 import classNames from "classnames";
 import "./TabList.scss";
 
 const TabList = ({ files, activeId, unsaveIds, onTabClick, onCloseTab }) => {
   return (
     <div className="tab-list-components">
-      <ul className="nav nav-pills">
+      <ul className="nav nav-pills tab-list-container">
         {map(files, (item, index) => {
+          const withUnsaveMarked =
+            findIndex(unsaveIds, (unSaveIitem) => {
+              return toNumber(unSaveIitem) === toNumber(item.id);
+            }) > -1;
           // 增加选中状态的样式
           const finallyClass = classNames({
             "nav-link": true,
             active: activeId === item.id,
+            withUnsaveMarked: withUnsaveMarked,
           });
           return (
-            <li className="nav-item" key={index}>
+            <li
+              className="nav-item tab-list-item"
+              key={index}
+              title={item.title}
+            >
               <a
                 href="#"
                 className={finallyClass}
@@ -31,10 +40,14 @@ const TabList = ({ files, activeId, unsaveIds, onTabClick, onCloseTab }) => {
                   <FontAwesomeIcon
                     onClick={(e) => {
                       e.stopPropagation();
+                      onCloseTab(item.id);
                     }}
                     icon={faTimes}
                   />
                 </span>
+                {withUnsaveMarked && (
+                  <span className="rounded-circle unsaved-icon ml-2"></span>
+                )}
               </a>
             </li>
           );
@@ -52,6 +65,6 @@ TabList.propTypes = {
 };
 
 TabList.defaultProps = {
-  unsaveIds: [],
+  unsaveIds: [2],
 };
 export default TabList;

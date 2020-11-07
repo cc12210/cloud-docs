@@ -63,6 +63,9 @@ function App() {
                 console.log(id);
                 setActiveId(id);
               }}
+              onCloseTab={(id) => {
+                console.log("关闭", id);
+              }}
             />
           </div>
         </div>
