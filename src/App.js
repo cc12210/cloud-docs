@@ -6,10 +6,12 @@ import FileSearch from "./components/FileSearch";
 import FileList from "./components/FileList";
 import BottomBtn from "./components/BottomBtn";
 import TabList from "./components/TabList";
+import EditContainer from "./components/EditContainer";
 import { fileListData, tabChoose } from "./utils/defaultJson";
 
 function App() {
   const [activeId, setActiveId] = useState(null);
+  const data = "###测试";
   return (
     <div className="App container-fluid app-container">
       <div className="row app-content">
@@ -67,6 +69,7 @@ function App() {
                 console.log("关闭", id);
               }}
             />
+            <EditContainer value={data} />
           </div>
         </div>
       </div>
