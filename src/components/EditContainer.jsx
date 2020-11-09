@@ -23,4 +23,7 @@ const EditContainer = ({ value }) => {
   );
 };
 
+EditContainer.propTypes = {
+  value: PropTypes.string,
+};
 export default EditContainer;
