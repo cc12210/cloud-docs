@@ -11,10 +11,15 @@ import "./FileList.scss";
 import { find, map } from "lodash";
 import useKeyPress from "../hooks/useKeyPress";
 
-const FileList = ({ files, onFileCilck, onFileEdit, onFileDelete }) => {
+const FileList = ({
+  files,
+  activeId,
+  onFileCilck,
+  onFileEdit,
+  onFileDelete,
+}) => {
   const [editStatus, setEditStatus] = useState(false);
   const [value, setVaule] = useState("");
-  const [activeIndex, setActiveIndex] = useState(0);
 
   const enterPress = useKeyPress(13);
   const escPress = useKeyPress(27);
@@ -50,11 +55,10 @@ const FileList = ({ files, onFileCilck, onFileEdit, onFileDelete }) => {
             return (
               <li
                 className={`list-group-item list-group-item-action d-flex justify-content-between align-items-center file-list-item ${
-                  activeIndex === index ? "active" : ""
+                  activeId === item.id ? "active" : ""
                 }`}
                 key={index}
                 onClick={() => {
-                  setActiveIndex(index);
                   onFileCilck(item.id);
                 }}
               >

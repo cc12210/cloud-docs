@@ -7,11 +7,40 @@ import FileList from "./components/FileList";
 import BottomBtn from "./components/BottomBtn";
 import TabList from "./components/TabList";
 import EditContainer from "./components/EditContainer";
-import { fileListData, tabChoose } from "./utils/defaultJson";
+import { fileListData } from "./utils/defaultJson";
+import { map, find, includes } from "lodash";
 
 function App() {
+  // 当前选中的acitive
   const [activeId, setActiveId] = useState(null);
-  const data = "###测试";
+  const [files, setFiles] = useState(fileListData);
+  // 存储选中的选项卡
+  const [openFileIDs, setOpendFileIDs] = useState([]);
+  // 未保存的文件
+  const [unsaveFileIDs, setUnsaveFileIDs] = useState([]);
+
+  // tablist的选项卡
+  const openedFiles = map(openFileIDs, (openID) => {
+    return find(files, (file) => {
+      return file.id === openID;
+    });
+  });
+  // 编辑的内容
+  const activeFileEdit = find(files, (file) => {
+    return file.id === activeId;
+  });
+
+  // 左侧选择文件
+  const chooseFile = (id) => {
+    // 避免重复点击
+    if (id === activeId) return;
+    // 设置当前选中的文件内容
+    setActiveId(id);
+    // 加入选项卡，如果不存在即加入列表选项卡
+    if (!includes(openFileIDs, id)) {
+      setOpendFileIDs([...openFileIDs, id]);
+    }
+  };
   return (
     <div className="App container-fluid app-container">
       <div className="row app-content">
@@ -29,9 +58,10 @@ function App() {
           {/* 文件列表 */}
           <div className="app-left-nav-list">
             <FileList
-              files={fileListData}
+              files={files}
+              activeId={activeId}
               onFileCilck={(id) => {
-                console.log(id);
+                chooseFile(id);
               }}
               onFileEdit={(id, value) => {
                 console.log(id, value);
@@ -59,8 +89,9 @@ function App() {
         <div className="col-9 app-right-content">
           <div className="app-right-tab">
             <TabList
-              files={tabChoose}
+              files={openedFiles}
               activeId={activeId}
+              unsaveIds={unsaveFileIDs}
               onTabClick={(id) => {
                 console.log(id);
                 setActiveId(id);
@@ -69,7 +100,7 @@ function App() {
                 console.log("关闭", id);
               }}
             />
-            <EditContainer value={data} />
+            <EditContainer value={activeFileEdit && activeFileEdit.content} />
           </div>
         </div>
       </div>

@@ -19,6 +19,19 @@ const EditContainer = ({ value }) => {
           }}
         />
       )}
+      {/* 没有tab的情况下给与markdown的提示 */}
+      {!value && (
+        <div className="card bg-light mb-3">
+          <div className="card-header">markdown的语法规则</div>
+          <div className="card-body">
+            <h5 className="card-title">标题</h5>
+            <p className="card-text">
+              格式：## 标题<br></br>
+              标题的大小从一个#到五个#递减
+            </p>
+          </div>
+        </div>
+      )}
     </div>
   );
 };
