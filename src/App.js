@@ -8,7 +8,7 @@ import BottomBtn from "./components/BottomBtn";
 import TabList from "./components/TabList";
 import EditContainer from "./components/EditContainer";
 import { fileListData } from "./utils/defaultJson";
-import { map, find, includes } from "lodash";
+import { map, find, includes, filter, findIndex, get } from "lodash";
 
 function App() {
   // 当前选中的acitive
@@ -40,6 +40,23 @@ function App() {
     if (!includes(openFileIDs, id)) {
       setOpendFileIDs([...openFileIDs, id]);
     }
+  };
+
+  // 关闭tab选项卡
+  const closeTabClick = (id) => {
+    if (id === activeId) {
+      const closeIndex = findIndex(openFileIDs, (tabId) => {
+        return tabId === id;
+      });
+      const preIndex = get(openFileIDs, `${closeIndex - 1}`, "");
+      const nextndex = get(openFileIDs, `${closeIndex + 1}`, "");
+      // 当前选中的内容被关闭时，进行判断，默认选中前一个，否则后一个
+      setActiveId(preIndex || nextndex);
+    }
+    const filterID = filter(openFileIDs, (tabId) => {
+      return tabId !== id;
+    });
+    setOpendFileIDs(filterID);
   };
   return (
     <div className="App container-fluid app-container">
@@ -93,11 +110,10 @@ function App() {
               activeId={activeId}
               unsaveIds={unsaveFileIDs}
               onTabClick={(id) => {
-                console.log(id);
                 setActiveId(id);
               }}
               onCloseTab={(id) => {
-                console.log("关闭", id);
+                closeTabClick(id);
               }}
             />
             <EditContainer value={activeFileEdit && activeFileEdit.content} />
