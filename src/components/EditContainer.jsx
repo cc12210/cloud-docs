@@ -4,11 +4,12 @@ import "easymde/dist/easymde.min.css";
 import PropTypes from "prop-types";
 import "./EditContainer.scss";
 
-const EditContainer = ({ value }) => {
+const EditContainer = ({ activeId, value }) => {
   return (
     <div className="edit-container">
       {value && (
         <SimpleMDE
+          key={activeId}
           className="edit-container-simple-mde"
           value={value}
           options={{

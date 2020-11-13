@@ -21,6 +21,7 @@
         }
       }
       .nav-link {
+        cursor: pointer;
         &.withUnsaveMarked {
           .close-icon {
             display: none;

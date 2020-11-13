@@ -27,8 +27,7 @@ const TabList = ({ files, activeId, unsaveIds, onTabClick, onCloseTab }) => {
               key={index}
               title={item.title}
             >
-              <a
-                href="#"
+              <span
                 className={finallyClass}
                 onClick={(e) => {
                   e.preventDefault();
@@ -48,7 +47,7 @@ const TabList = ({ files, activeId, unsaveIds, onTabClick, onCloseTab }) => {
                 {withUnsaveMarked && (
                   <span className="rounded-circle unsaved-icon ml-2"></span>
                 )}
-              </a>
+              </span>
             </li>
           );
         })}

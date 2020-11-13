@@ -116,7 +116,10 @@ function App() {
                 closeTabClick(id);
               }}
             />
-            <EditContainer value={activeFileEdit && activeFileEdit.content} />
+            <EditContainer
+              activeId={activeId}
+              value={activeFileEdit && activeFileEdit.content}
+            />
           </div>
         </div>
       </div>
